@@ -44,3 +44,14 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+Project target:
+- Apply mutilanguages (as API applied)
+- Write unit test
+- Setup linter: ref https://robertcooper.me/post/using-eslint-and-prettier-in-a-typescript-project
+- Accesibility: support keyboard:
+        - Tab to focus on search box
+        - Up/down arrow to focus on selection on search location
+- Error handling: handle for failed cases always
+- Setup logging, monitoring tool
+- Writing unit test (50% test before, 50% TDD)

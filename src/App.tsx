@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import { ReactElement } from 'react';
+import WeatherInfo from './WeatherInfo/WeatherInfo';
 
-function App() {
+function App(): ReactElement {
     return (
         <div className="App">
             <header className="App-header">
@@ -12,6 +14,7 @@ function App() {
                 <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
                     Learn React
                 </a>
+                <WeatherInfo />
             </header>
         </div>
     );

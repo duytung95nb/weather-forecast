@@ -1,10 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { DefaultLocation } from '../Models/DefaultLocation';
-import { WeatherInfoState } from './Model';
+import { WeatherInfoState } from './Models';
 
 const initialState: WeatherInfoState = {
     defaultLocation: null,
     forecastList: [],
+    error: {
+        fetchInitialLocation: false,
+    },
 };
 
 const slice = createSlice({

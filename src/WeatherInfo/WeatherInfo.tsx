@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Models/RootState';
 import ForecastList from './ForecastList/ForecastList';
 import Location from './Location/Location';
-import { WeatherInfoState } from './Model';
+import { WeatherInfoState } from './Models';
 import { weatherInfoActions } from './WeatherInfoSlice';
 
 interface Props {}

@@ -4,12 +4,13 @@ import createSagaMiddleware from 'redux-saga';
 import { weatherInfoSaga } from './WeatherInfo/WeatherInfoSaga';
 
 const rootReducer = combineReducers({
-    home: weatherInfoReducer,
+    weatherInfo: weatherInfoReducer,
 });
 const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(sagaMiddleware),
 });
 sagaMiddleware.run(weatherInfoSaga);
 export default store;

@@ -1,9 +1,11 @@
 import axios from 'axios';
-import { DefaultCity } from '../Models/DefaultCity';
+import { DefaultLocation as DefaultLocation } from '../Models/DefaultLocation';
 
 class GeolocationDataService {
     async getByIpAddress() {
-        return await axios.get<DefaultCity>('http://www.geoplugin.net/json.gp');
+        return await axios
+            .get<DefaultLocation>('http://www.geoplugin.net/json.gp')
+            .then((result) => result.data);
     }
 }
 const geolocationDataService = new GeolocationDataService();

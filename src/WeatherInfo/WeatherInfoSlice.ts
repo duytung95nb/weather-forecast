@@ -1,11 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { DefaultLocation } from '../Models/DefaultLocation';
 import { WeatherInfoState } from './Model';
 
 const initialState: WeatherInfoState = {
-    page: 0,
-    users: [],
-    currentUserIndex: 0,
-    userIdToDetailMap: {},
+    defaultLocation: null,
+    forecastList: [],
 };
 
 const slice = createSlice({
@@ -13,12 +12,18 @@ const slice = createSlice({
     initialState: initialState,
     reducers: {
         fetchInitialLocation: () => {},
-        fetchInitialLocationSuccess: (state, action) => {
-            console.log(action);
+        fetchInitialLocationSuccess: (
+            state,
+            action: PayloadAction<DefaultLocation>,
+        ) => {
+            state.defaultLocation = action.payload;
         },
         fetchInitialLocationFailed: (state, action) => {
             console.log(action);
         },
     },
 });
-export const { reducer: weatherInfoReducer, actions: weatherInfoActions } = slice;
+export const {
+    reducer: weatherInfoReducer,
+    actions: weatherInfoActions,
+} = slice;

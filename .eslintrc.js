@@ -18,11 +18,12 @@ module.exports = {
         'plugin:prettier/recommended', // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
     ],
     rules: {
-        "react/jsx-uses-react": "off",
-        "react/react-in-jsx-scope": "off", 
-        "@typescript-eslint/no-empty-function": "off",
-        "@typescript-eslint/no-empty-interface": "off",
-        "@typescript-eslint/no-unused-vars": "off",
-        "@typescript-eslint/explicit-module-boundary-types": "off"
+        'react/jsx-uses-react': 'off',
+        'react/react-in-jsx-scope': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
+        '@typescript-eslint/no-empty-interface': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        'max-len': ['error', { code: 80, tabWidth: 4 }],
     },
 };

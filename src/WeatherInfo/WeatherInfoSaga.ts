@@ -1,12 +1,16 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import geolocationDataService from '../DataServices/GeolocationDataService';
-import { DefaultCity } from '../Models/DefaultCity';
+import { DefaultLocation } from '../Models/DefaultLocation';
 import { weatherInfoActions } from './WeatherInfoSlice';
 
 function* fetchInitialLocation() {
     try {
-        const geoLocationResult: DefaultCity = yield call(geolocationDataService.getByIpAddress);
-        yield put(weatherInfoActions.fetchInitialLocationSuccess(geoLocationResult));
+        const geoLocationResult: DefaultLocation = yield call(
+            geolocationDataService.getByIpAddress,
+        );
+        yield put(
+            weatherInfoActions.fetchInitialLocationSuccess(geoLocationResult),
+        );
     } catch (e) {
         yield put(weatherInfoActions.fetchInitialLocationFailed(e));
     }
@@ -17,5 +21,8 @@ function* fetchInitialLocation() {
   Allows concurrent fetches of user.
 */
 export function* weatherInfoSaga() {
-    yield takeEvery(weatherInfoActions.fetchInitialLocation, fetchInitialLocation);
+    yield takeEvery(
+        weatherInfoActions.fetchInitialLocation,
+        fetchInitialLocation,
+    );
 }

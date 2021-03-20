@@ -1,16 +1,20 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { weatherInfoReducer } from './WeatherInfo/WeatherInfoSlice';
+import { defaultWeatherInfoReducer } from './Containers/DefaultWeatherInfo/DefaultWeatherInfoSlice';
 import createSagaMiddleware from 'redux-saga';
-import { weatherInfoSaga } from './WeatherInfo/WeatherInfoSaga';
+import { searchReducer } from './Containers/Search/SearchSlice';
+import rootSaga from './RootSaga';
+import { locationWeatherInfoReducer } from './Containers/LocationWeatherInfo/LocationWeatherInfoSlice';
 
 const rootReducer = combineReducers({
-    weatherInfo: weatherInfoReducer,
+  defaultWeatherInfo: defaultWeatherInfoReducer,
+  locationWeatherInfo: locationWeatherInfoReducer,
+  searchBox: searchReducer,
 });
 const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
-    reducer: rootReducer,
-    middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(sagaMiddleware),
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(sagaMiddleware),
 });
-sagaMiddleware.run(weatherInfoSaga);
+sagaMiddleware.run(rootSaga);
 export default store;

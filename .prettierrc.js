@@ -1,7 +1,9 @@
 module.exports = {
     semi: true,
-    trailingComma: "all",
+    trailingComma: 'all',
     singleQuote: true,
     printWidth: 80,
-    tabWidth: 4,
+    tabWidth: 2,
+    ignorePattern: "^import\\s.+\\sfrom\\s.+;$",
+    ignoreUrls: true
 };

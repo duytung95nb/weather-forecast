@@ -16,7 +16,7 @@ function* fetchLocationByIp() {
       defaultWeatherInfoActions.fetchLocationByIPSuccess(geoLocationResult),
     );
   } catch (e) {
-    yield put(defaultWeatherInfoActions.fetchLocationByIPFailed(e));
+    yield put(defaultWeatherInfoActions.fetchLocationByIPFailed(e.message));
   }
 }
 function* fetchNearestLocation(action: PayloadAction<DefaultLocation>) {
@@ -28,7 +28,7 @@ function* fetchNearestLocation(action: PayloadAction<DefaultLocation>) {
     );
     yield put(defaultWeatherInfoActions.fetchNearestLocationSuccess(locations));
   } catch (e) {
-    yield put(defaultWeatherInfoActions.fetchNearestLocationFailed(e));
+    yield put(defaultWeatherInfoActions.fetchNearestLocationFailed(e.message));
   }
 }
 function* fetchForecastList(action: PayloadAction<Location>) {
@@ -41,7 +41,7 @@ function* fetchForecastList(action: PayloadAction<Location>) {
       defaultWeatherInfoActions.fetchForecastListSuccess(forecastResult),
     );
   } catch (e) {
-    yield put(defaultWeatherInfoActions.fetchForecastListFailed(e));
+    yield put(defaultWeatherInfoActions.fetchForecastListFailed(e.message));
   }
 }
 

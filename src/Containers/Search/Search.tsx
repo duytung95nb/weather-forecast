@@ -19,7 +19,7 @@ function filterOption(option: Option, rawInput: string) {
   }
   return option.label
     .toLocaleLowerCase()
-    .includes(rawInput.toLocaleLowerCase());
+    .includes(rawInput.trim().toLocaleLowerCase());
 }
 function loadingMessage(obj: { inputValue: string }) {
   return `Loading result for ${obj.inputValue}`;
@@ -30,9 +30,9 @@ const Search: FunctionComponent<Props> = (props) => {
     SearchState
   >((state) => state.searchBox);
   const dispatch = useDispatch();
-  const onInputChange = useDebouncedCallback((newValue: string) => {
+  const fetchLocations = useDebouncedCallback((newValue: string) => {
     dispatch(searchActions.fetchLocations(newValue));
-  }, 800);
+  }, 300);
   const onSelectedOptionChange = (newValue: ValueType<Option, false>) => {
     dispatch(searchActions.selectLocationOption(newValue));
   };
@@ -55,7 +55,7 @@ const Search: FunctionComponent<Props> = (props) => {
         isLoading={loadingData}
         loadingMessage={loadingMessage}
         options={locationOptions}
-        onInputChange={onInputChange}
+        onInputChange={fetchLocations}
         onChange={onSelectedOptionChange}
         openMenuOnFocus={false}
         openMenuOnClick={false}

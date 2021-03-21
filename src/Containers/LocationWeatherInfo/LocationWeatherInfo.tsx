@@ -29,11 +29,12 @@ export default function LocationWeatherInfo() {
     );
   }, [selectedLocationOption]);
   useEffect(() => {
-    const { fetchInitialLocation } = error;
-    if (fetchInitialLocation) {
-      addToast(errorMessage, { appearance: 'error' });
-    }
-    dispatch(locationWeatherInfoActions.resetForecastResult());
+    Object.keys(error).forEach((key) => {
+      if (error[key]) {
+        addToast(errorMessage, { appearance: 'error' });
+      }
+    });
+    dispatch(locationWeatherInfoActions.resetErrorState());
   }, [error, errorMessage]);
   return (
     <Container hidden={!selectedLocationOption}>

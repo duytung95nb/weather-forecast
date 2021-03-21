@@ -1,94 +1,25 @@
 import moment from 'moment';
 import { AnyAction } from 'redux';
-import { Location } from '../Search/Models';
+import { ForecastResult } from '../DefaultWeatherInfo/Models';
 import {
-  defaultWeatherInfoActions,
-  defaultWeatherInfoReducer,
-} from './DefaultWeatherInfoSlice';
-import { DefaultWeatherInfoState, ForecastResult } from './Models';
+  locationWeatherInfoActions,
+  locationWeatherInfoReducer,
+} from './LocationWeatherInfoSlice';
+import { LocationWeatherInfoState } from './Models';
 
-describe('Default weather info reducers', () => {
-  const initialState: DefaultWeatherInfoState = {
-    locationByIpAddress: null,
-    nearestLocation: null,
+describe('Location weather info reducers', () => {
+  const initialState: LocationWeatherInfoState = {
     forecastResult: null,
     error: {
-      fetchLocationByIP: false,
-      fetchNearestLocation: false,
-      fetchForecastList: false,
+      fetchForecast: false,
     },
     errorMessage: '',
     loadingData: false,
   };
 
   it('returns the initial state when an action type is not passed', () => {
-    const newState = defaultWeatherInfoReducer(undefined, {} as AnyAction);
+    const newState = locationWeatherInfoReducer(undefined, {} as AnyAction);
     expect(newState).toEqual(initialState);
-  });
-  describe('fetchNearestLocationSuccess', () => {
-    it('returns no location', () => {
-      const mockLocations = [] as Location[];
-      const newState = defaultWeatherInfoReducer(
-        initialState,
-        defaultWeatherInfoActions.fetchNearestLocationSuccess(mockLocations),
-      );
-      expect(newState.nearestLocation).toEqual(undefined);
-    });
-    it('returns the only location', () => {
-      const mockLocations = [
-        {
-          distance: 20,
-        },
-      ] as Location[];
-      const newState = defaultWeatherInfoReducer(
-        initialState,
-        defaultWeatherInfoActions.fetchNearestLocationSuccess(mockLocations),
-      );
-      expect(newState.nearestLocation).toEqual(mockLocations[0]);
-    });
-    it('returns nearest location', () => {
-      const mockLocations = [
-        {
-          distance: 20,
-        },
-        {
-          distance: 10,
-        },
-        {
-          distance: 30,
-        },
-        {
-          distance: 40,
-        },
-      ] as Location[];
-      const newState = defaultWeatherInfoReducer(
-        initialState,
-        defaultWeatherInfoActions.fetchNearestLocationSuccess(mockLocations),
-      );
-      expect(newState.nearestLocation).toEqual(mockLocations[1]);
-    });
-
-    it('returns nearest later location', () => {
-      const mockLocations = [
-        {
-          distance: 20,
-        },
-        {
-          distance: 10,
-        },
-        {
-          distance: 10,
-        },
-        {
-          distance: 40,
-        },
-      ] as Location[];
-      const newState = defaultWeatherInfoReducer(
-        initialState,
-        defaultWeatherInfoActions.fetchNearestLocationSuccess(mockLocations),
-      );
-      expect(newState.nearestLocation).toEqual(mockLocations[2]);
-    });
   });
   describe('fetchForecastListSuccess', () => {
     const numberOfForecastDays = 5;
@@ -113,9 +44,9 @@ describe('Default weather info reducers', () => {
           },
         ],
       } as ForecastResult;
-      const newState = defaultWeatherInfoReducer(
+      const newState = locationWeatherInfoReducer(
         initialState,
-        defaultWeatherInfoActions.fetchForecastListSuccess(mockForecastResult),
+        locationWeatherInfoActions.fetchForecastListSuccess(mockForecastResult),
       );
       expect(newState.forecastResult?.consolidated_weather.length).toBe(
         numberOfForecastDays,
@@ -147,9 +78,9 @@ describe('Default weather info reducers', () => {
           },
         ],
       } as ForecastResult;
-      const newState = defaultWeatherInfoReducer(
+      const newState = locationWeatherInfoReducer(
         initialState,
-        defaultWeatherInfoActions.fetchForecastListSuccess(mockForecastResult),
+        locationWeatherInfoActions.fetchForecastListSuccess(mockForecastResult),
       );
       expect(newState.forecastResult?.consolidated_weather.length).toBe(
         numberOfForecastDays,
@@ -176,9 +107,9 @@ describe('Default weather info reducers', () => {
           },
         ],
       } as ForecastResult;
-      const newState = defaultWeatherInfoReducer(
+      const newState = locationWeatherInfoReducer(
         initialState,
-        defaultWeatherInfoActions.fetchForecastListSuccess(mockForecastResult),
+        locationWeatherInfoActions.fetchForecastListSuccess(mockForecastResult),
       );
       expect(newState.forecastResult?.consolidated_weather.length).toBe(3);
     });
@@ -194,9 +125,9 @@ describe('Default weather info reducers', () => {
           },
         ],
       } as ForecastResult;
-      const newState = defaultWeatherInfoReducer(
+      const newState = locationWeatherInfoReducer(
         initialState,
-        defaultWeatherInfoActions.fetchForecastListSuccess(mockForecastResult),
+        locationWeatherInfoActions.fetchForecastListSuccess(mockForecastResult),
       );
       expect(newState.forecastResult?.consolidated_weather.length).toBe(0);
     });

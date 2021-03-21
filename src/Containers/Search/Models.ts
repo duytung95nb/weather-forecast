@@ -9,7 +9,6 @@ export interface Location {
   distance: number;
 }
 export interface SearchState extends BaseContainerState {
-  searchText: string;
   locationLattLongToDataMap: { [key: string]: Location };
   locationOptions?: Option[];
   selectedLocationOption: Option | null;

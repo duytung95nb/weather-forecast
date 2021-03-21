@@ -4,7 +4,6 @@ import { Option } from 'react-select/src/filters';
 import { Location, SearchState } from './Models';
 
 const initialState: SearchState = {
-  searchText: '',
   locationLattLongToDataMap: {},
   locationOptions: undefined,
   selectedLocationOption: null,
@@ -42,22 +41,6 @@ const slice = createSlice({
       state.error.fetchLocationsFailed = true;
       state.errorMessage = action.payload.message;
     },
-    fetchLocationsByLattLongSuccess: (
-      state,
-      action: PayloadAction<Location[]>,
-    ) => {
-      state.loadingData = false;
-      action.payload.forEach((location) => {
-        state.locationLattLongToDataMap[location.latt_long] = location;
-      });
-      state.locationOptions = action.payload.map((l) => {
-        return {
-          label: l.title,
-          value: l.latt_long,
-          data: l,
-        } as Option;
-      });
-    },
     fetchLocationsByLattLongFailed: (
       state,
       action: PayloadAction<AxiosError>,
@@ -72,7 +55,6 @@ const slice = createSlice({
     resetSearch: (state) => {
       state.loadingData = false;
       state.locationOptions = undefined;
-      state.searchText = '';
     },
     resetErrorState: (state) => {
       Object.keys(state.error).forEach((key) => {

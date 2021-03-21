@@ -1,12 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { DefaultLocation } from '../../Models/DefaultLocation';
-import { ForecastResult } from '../DefaultWeatherInfo/Models';
+import moment from 'moment';
+import { ForecastItem, ForecastResult } from '../DefaultWeatherInfo/Models';
 import { Location } from '../Search/Models';
 import { LocationWeatherInfoState } from './Models';
 
 const initialState: LocationWeatherInfoState = {
-  selectedLocation: null,
   forecastResult: null,
   error: {
     fetchForecast: false,
@@ -27,12 +26,30 @@ const slice = createSlice({
       action: PayloadAction<ForecastResult>,
     ) => {
       state.loadingData = false;
+      let daysCount = 0;
+      const next5DaysForecast = action.payload.consolidated_weather.reduce(
+        (prevVal: ForecastItem[], item) => {
+          if (
+            moment(item.applicable_date, 'YYYY-MM-DD').isAfter(
+              moment(),
+              'day',
+            ) &&
+            daysCount < 5
+          ) {
+            prevVal.push(item);
+            daysCount++;
+          }
+          return prevVal;
+        },
+        [],
+      );
       state.forecastResult = action.payload;
+      state.forecastResult.consolidated_weather = next5DaysForecast;
     },
-    fetchForecastListFailed: (state, action: PayloadAction<AxiosError>) => {
+    fetchForecastListFailed: (state, action: PayloadAction<string>) => {
       state.loadingData = false;
       state.error.fetchForecast = true;
-      state.errorMessage = action.payload.message;
+      state.errorMessage = action.payload;
     },
     resetForecastResult: (state) => {
       state.forecastResult = null;

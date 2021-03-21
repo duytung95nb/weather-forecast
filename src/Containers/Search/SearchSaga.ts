@@ -22,7 +22,7 @@ function* fetchLocations(action: PayloadAction<string>) {
         lattAsFloat,
         longAsFloat,
       );
-      yield put(searchActions.fetchLocationsByLattLongSuccess(locations));
+      yield put(searchActions.fetchLocationsSuccess(locations));
     } catch (e) {
       yield put(searchActions.fetchLocationsByLattLongFailed(e));
     }
@@ -40,10 +40,6 @@ function* fetchLocations(action: PayloadAction<string>) {
   }
 }
 
-/*
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
-*/
 export default function* searchSaga() {
   yield takeLatest(searchActions.fetchLocations, fetchLocations);
 }

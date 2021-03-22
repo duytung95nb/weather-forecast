@@ -19,9 +19,7 @@ const DefaultWeatherInfo: FunctionComponent<Props> = (props) => {
     loadingData,
     error,
     errorMessage,
-  } = useSelector<RootState, DefaultWeatherInfoState>(
-    (state) => state.defaultWeatherInfo,
-  );
+  } = useSelector<RootState, DefaultWeatherInfoState>((state) => state.defaultWeatherInfo);
   const { addToast } = useToasts();
   const { selectedLocationOption } = useSelector<RootState, SearchState>(
     (state) => state.searchBox,
@@ -34,9 +32,7 @@ const DefaultWeatherInfo: FunctionComponent<Props> = (props) => {
       return;
     }
     // Fetch data for default location
-    dispatch(
-      defaultWeatherInfoActions.fetchNearestLocation(locationByIpAddress),
-    );
+    dispatch(defaultWeatherInfoActions.fetchNearestLocation(locationByIpAddress));
   }, [locationByIpAddress]);
   useEffect(() => {
     if (!nearestLocation) {
@@ -46,11 +42,7 @@ const DefaultWeatherInfo: FunctionComponent<Props> = (props) => {
     dispatch(defaultWeatherInfoActions.fetchForecastList(nearestLocation));
   }, [nearestLocation]);
   useEffect(() => {
-    const {
-      fetchLocationByIP,
-      fetchNearestLocation,
-      fetchForecastList,
-    } = error;
+    const { fetchLocationByIP, fetchNearestLocation, fetchForecastList } = error;
     if (fetchLocationByIP || fetchNearestLocation || fetchForecastList) {
       addToast(errorMessage, { appearance: 'error' });
     }

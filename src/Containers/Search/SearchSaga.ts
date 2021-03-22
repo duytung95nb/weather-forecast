@@ -30,10 +30,7 @@ function* fetchLocations(action: PayloadAction<string>) {
   }
   try {
     // Search by lat long if search term is a couple of number
-    const locations: Location[] = yield call(
-      geolocationDataService.searchByText,
-      action.payload,
-    );
+    const locations: Location[] = yield call(geolocationDataService.searchByText, action.payload);
     yield put(searchActions.fetchLocationsSuccess(locations));
   } catch (e) {
     yield put(searchActions.fetchLocationsFailed(e));

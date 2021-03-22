@@ -24,9 +24,7 @@ export default function LocationWeatherInfo() {
       dispatch(locationWeatherInfoActions.resetForecastResult());
       return;
     }
-    dispatch(
-      locationWeatherInfoActions.fetchForecastList(selectedLocationOption.data),
-    );
+    dispatch(locationWeatherInfoActions.fetchForecastList(selectedLocationOption.data));
   }, [selectedLocationOption]);
   useEffect(() => {
     Object.keys(error).forEach((key) => {
@@ -38,10 +36,7 @@ export default function LocationWeatherInfo() {
   }, [error, errorMessage]);
   return (
     <Container hidden={!selectedLocationOption}>
-      <Location
-        title={selectedLocationOption?.label}
-        currentTime={forecastResult?.time}
-      ></Location>
+      <Location title={selectedLocationOption?.label} currentTime={forecastResult?.time}></Location>
       <ForecastList
         forecastItems={forecastResult?.consolidated_weather}
         loadingData={loadingData}

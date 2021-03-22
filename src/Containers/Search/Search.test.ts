@@ -45,8 +45,7 @@ describe('Search reducers', () => {
         searchActions.fetchLocationsSuccess(fetchedLocations),
       );
       expect(newState.locationOptions?.length).toEqual(
-        fetchedLocations.length +
-          Object.keys(currentState.locationLattLongToDataMap).length,
+        fetchedLocations.length + Object.keys(currentState.locationLattLongToDataMap).length,
       );
     });
 

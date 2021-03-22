@@ -26,9 +26,7 @@ const slice = createSlice({
       action.payload.forEach((location) => {
         state.locationLattLongToDataMap[location.latt_long] = location;
       });
-      state.locationOptions = Object.values(
-        state.locationLattLongToDataMap,
-      ).map((l) => {
+      state.locationOptions = Object.values(state.locationLattLongToDataMap).map((l) => {
         return {
           label: l.title,
           value: l.latt_long,
@@ -41,10 +39,7 @@ const slice = createSlice({
       state.error.fetchLocationsFailed = true;
       state.errorMessage = action.payload.message;
     },
-    fetchLocationsByLattLongFailed: (
-      state,
-      action: PayloadAction<AxiosError>,
-    ) => {
+    fetchLocationsByLattLongFailed: (state, action: PayloadAction<AxiosError>) => {
       state.loadingData = false;
       state.error.fetchLocationsFailed = true;
       state.errorMessage = action.payload.message;

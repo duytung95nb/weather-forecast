@@ -29,9 +29,7 @@ export default function ForecastList(props: Props) {
             <Col className={'mt-2'} xs={12} lg={2} md={4} key={item.id}>
               <Card>
                 <Card.Header>
-                  <Card.Title>
-                    {getDisplayApplicableDate(item.applicable_date)}
-                  </Card.Title>
+                  <Card.Title>{getDisplayApplicableDate(item.applicable_date)}</Card.Title>
                 </Card.Header>
                 <Card.Body>
                   <Card.Text>Min: {Math.round(item.min_temp)}&#8451;</Card.Text>

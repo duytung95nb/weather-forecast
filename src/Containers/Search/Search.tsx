@@ -17,18 +17,15 @@ function filterOption(option: Option, rawInput: string) {
   if (isValidLattLong) {
     return true;
   }
-  return option.label
-    .toLocaleLowerCase()
-    .includes(rawInput.trim().toLocaleLowerCase());
+  return option.label.toLocaleLowerCase().includes(rawInput.trim().toLocaleLowerCase());
 }
 function loadingMessage(obj: { inputValue: string }) {
   return `Loading result for ${obj.inputValue}`;
 }
 const Search: FunctionComponent<Props> = (props) => {
-  const { locationOptions, error, errorMessage, loadingData } = useSelector<
-    RootState,
-    SearchState
-  >((state) => state.searchBox);
+  const { locationOptions, error, errorMessage, loadingData } = useSelector<RootState, SearchState>(
+    (state) => state.searchBox,
+  );
   const dispatch = useDispatch();
   const fetchLocations = useDebouncedCallback((newValue: string) => {
     dispatch(searchActions.fetchLocations(newValue));

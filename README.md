@@ -1,4 +1,4 @@
-## Note: Because I use weather API from https://www.metaweather.com/api which I cannot find a way to do ajax request from origin http://localhost:3000, so please enable CORS from your browser when using this app.
+## Note: Because I use weather API from https://www.metaweather.com/api which does not have or provide any method to do ajax request from origin http://localhost:3000, so please enable CORS from your browser when using this app.
 For chrome, we can install extension: Allow CORS: Access-Control-Allow-Origin
 ## Available Scripts
 

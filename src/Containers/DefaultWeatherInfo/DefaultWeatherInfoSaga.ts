@@ -9,12 +9,8 @@ import { ForecastResult } from './Models';
 
 function* fetchLocationByIp() {
   try {
-    const geoLocationResult: DefaultLocation = yield call(
-      geolocationDataService.getByIpAddress,
-    );
-    yield put(
-      defaultWeatherInfoActions.fetchLocationByIPSuccess(geoLocationResult),
-    );
+    const geoLocationResult: DefaultLocation = yield call(geolocationDataService.getByIpAddress);
+    yield put(defaultWeatherInfoActions.fetchLocationByIPSuccess(geoLocationResult));
   } catch (e) {
     yield put(defaultWeatherInfoActions.fetchLocationByIPFailed(e.message));
   }
@@ -37,9 +33,7 @@ function* fetchForecastList(action: PayloadAction<Location>) {
       forecastDataService.getForecastInfo,
       action.payload.woeid,
     );
-    yield put(
-      defaultWeatherInfoActions.fetchForecastListSuccess(forecastResult),
-    );
+    yield put(defaultWeatherInfoActions.fetchForecastListSuccess(forecastResult));
   } catch (e) {
     yield put(defaultWeatherInfoActions.fetchForecastListFailed(e.message));
   }
@@ -50,16 +44,7 @@ function* fetchForecastList(action: PayloadAction<Location>) {
   Allows concurrent fetches of user.
 */
 export default function* defaultWeatherInfoSaga() {
-  yield takeLatest(
-    defaultWeatherInfoActions.fetchLocationByIp,
-    fetchLocationByIp,
-  );
-  yield takeLatest(
-    defaultWeatherInfoActions.fetchNearestLocation,
-    fetchNearestLocation,
-  );
-  yield takeLatest(
-    defaultWeatherInfoActions.fetchForecastList,
-    fetchForecastList,
-  );
+  yield takeLatest(defaultWeatherInfoActions.fetchLocationByIp, fetchLocationByIp);
+  yield takeLatest(defaultWeatherInfoActions.fetchNearestLocation, fetchNearestLocation);
+  yield takeLatest(defaultWeatherInfoActions.fetchForecastList, fetchForecastList);
 }

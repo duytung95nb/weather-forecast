@@ -1,10 +1,7 @@
 import moment from 'moment';
 import { AnyAction } from 'redux';
 import { ForecastResult } from '../DefaultWeatherInfo/Models';
-import {
-  locationWeatherInfoActions,
-  locationWeatherInfoReducer,
-} from './LocationWeatherInfoSlice';
+import { locationWeatherInfoActions, locationWeatherInfoReducer } from './LocationWeatherInfoSlice';
 import { LocationWeatherInfoState } from './Models';
 
 describe('Location weather info reducers', () => {
@@ -48,11 +45,9 @@ describe('Location weather info reducers', () => {
         initialState,
         locationWeatherInfoActions.fetchForecastListSuccess(mockForecastResult),
       );
-      expect(newState.forecastResult?.consolidated_weather.length).toBe(
-        numberOfForecastDays,
-      );
+      expect(newState.forecastResult?.consolidated_weather.length).toBe(numberOfForecastDays);
     });
-    it('returns the list of next 5 days forecast', () => {
+    it('returns the list of next 5 days forecast when there are days ahead', () => {
       const mockForecastResult = {
         consolidated_weather: [
           {
@@ -82,9 +77,7 @@ describe('Location weather info reducers', () => {
         initialState,
         locationWeatherInfoActions.fetchForecastListSuccess(mockForecastResult),
       );
-      expect(newState.forecastResult?.consolidated_weather.length).toBe(
-        numberOfForecastDays,
-      );
+      expect(newState.forecastResult?.consolidated_weather.length).toBe(numberOfForecastDays);
     });
 
     it('returns the list of next 3 days forecast', () => {

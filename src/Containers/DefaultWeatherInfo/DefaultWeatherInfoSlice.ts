@@ -3,11 +3,7 @@ import { AxiosError } from 'axios';
 import moment from 'moment';
 import { DefaultLocation } from '../../Models/DefaultLocation';
 import { Location } from '../Search/Models';
-import {
-  DefaultWeatherInfoState,
-  ForecastItem,
-  ForecastResult,
-} from './Models';
+import { DefaultWeatherInfoState, ForecastItem, ForecastResult } from './Models';
 
 const initialState: DefaultWeatherInfoState = {
   locationByIpAddress: null,
@@ -29,10 +25,7 @@ const slice = createSlice({
     fetchLocationByIp: (state) => {
       state.loadingData = true;
     },
-    fetchLocationByIPSuccess: (
-      state,
-      action: PayloadAction<DefaultLocation>,
-    ) => {
+    fetchLocationByIPSuccess: (state, action: PayloadAction<DefaultLocation>) => {
       state.loadingData = false;
       state.locationByIpAddress = action.payload;
     },
@@ -62,19 +55,13 @@ const slice = createSlice({
     fetchForecastList: (state, action: PayloadAction<Location>) => {
       state.loadingData = true;
     },
-    fetchForecastListSuccess: (
-      state,
-      action: PayloadAction<ForecastResult>,
-    ) => {
+    fetchForecastListSuccess: (state, action: PayloadAction<ForecastResult>) => {
       state.loadingData = false;
       let daysCount = 0;
       const next5DaysForecast = action.payload.consolidated_weather.reduce(
         (prevVal: ForecastItem[], item) => {
           if (
-            moment(item.applicable_date, 'YYYY-MM-DD').isAfter(
-              moment(),
-              'day',
-            ) &&
+            moment(item.applicable_date, 'YYYY-MM-DD').isAfter(moment(), 'day') &&
             daysCount < 5
           ) {
             prevVal.push(item);
@@ -100,7 +87,4 @@ const slice = createSlice({
     },
   },
 });
-export const {
-  reducer: defaultWeatherInfoReducer,
-  actions: defaultWeatherInfoActions,
-} = slice;
+export const { reducer: defaultWeatherInfoReducer, actions: defaultWeatherInfoActions } = slice;

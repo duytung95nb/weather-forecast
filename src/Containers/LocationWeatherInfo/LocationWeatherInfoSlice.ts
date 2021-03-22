@@ -21,19 +21,13 @@ const slice = createSlice({
     fetchForecastList: (state, action: PayloadAction<Location>) => {
       state.loadingData = true;
     },
-    fetchForecastListSuccess: (
-      state,
-      action: PayloadAction<ForecastResult>,
-    ) => {
+    fetchForecastListSuccess: (state, action: PayloadAction<ForecastResult>) => {
       state.loadingData = false;
       let daysCount = 0;
       const next5DaysForecast = action.payload.consolidated_weather.reduce(
         (prevVal: ForecastItem[], item) => {
           if (
-            moment(item.applicable_date, 'YYYY-MM-DD').isAfter(
-              moment(),
-              'day',
-            ) &&
+            moment(item.applicable_date, 'YYYY-MM-DD').isAfter(moment(), 'day') &&
             daysCount < 5
           ) {
             prevVal.push(item);
@@ -62,7 +56,4 @@ const slice = createSlice({
     },
   },
 });
-export const {
-  reducer: locationWeatherInfoReducer,
-  actions: locationWeatherInfoActions,
-} = slice;
+export const { reducer: locationWeatherInfoReducer, actions: locationWeatherInfoActions } = slice;

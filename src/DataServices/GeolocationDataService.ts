@@ -4,9 +4,7 @@ import AxiosAdapter from './AxiosAdapter';
 import { Location } from '../Containers/Search/Models';
 class GeolocationDataService {
   getByIpAddress() {
-    return AxiosAdapter.get<DefaultLocation>(
-      'http://www.geoplugin.net/json.gp',
-    );
+    return AxiosAdapter.get<DefaultLocation>('http://www.geoplugin.net/json.gp');
   }
   searchByText(text: string) {
     return AxiosAdapter.get<Location[]>(

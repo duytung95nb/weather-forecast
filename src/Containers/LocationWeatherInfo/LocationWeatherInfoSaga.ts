@@ -12,17 +12,12 @@ function* fetchForecastList(action: PayloadAction<Location>) {
       forecastDataService.getForecastInfo,
       action.payload.woeid,
     );
-    yield put(
-      locationWeatherInfoActions.fetchForecastListSuccess(forecastResult),
-    );
+    yield put(locationWeatherInfoActions.fetchForecastListSuccess(forecastResult));
   } catch (e) {
     yield put(locationWeatherInfoActions.fetchForecastListFailed(e.message));
   }
 }
 
 export default function* locationtWeatherInfoSaga() {
-  yield takeLatest(
-    locationWeatherInfoActions.fetchForecastList,
-    fetchForecastList,
-  );
+  yield takeLatest(locationWeatherInfoActions.fetchForecastList, fetchForecastList);
 }

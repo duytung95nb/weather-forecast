@@ -1,4 +1,4 @@
-## Note: Because I use weather API from https://www.metaweather.com/api which does not support CORS, so pleaes enable CORS from your browser when using this app.
+## Note: Because I use weather API from https://www.metaweather.com/api which I cannot find a way to do ajax request from origin http://localhost:3000, so please enable CORS from your browser when using this app.
 For chrome, we can install extension: Allow CORS: Access-Control-Allow-Origin
 ## Available Scripts
 
@@ -14,10 +14,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
-
-Project target:
-- Setup linter: ref https://robertcooper.me/post/using-eslint-and-prettier-in-a-typescript-project
-- Accesibility: support keyboard:
-        - Tab to focus on search box
-        - Up/down arrow to focus on selection on search location
-- Write unit test

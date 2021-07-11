@@ -37,4 +37,5 @@ AxiosBackEndAdapter.interceptors.response.use(
 );
 const AxiosAdapter =
   process.env.REACT_APP_USE_BACK_END_ADAPTER === 'true' ? AxiosBackEndAdapter : AxiosNormal;
+
 export default AxiosAdapter;

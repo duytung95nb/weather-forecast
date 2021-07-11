@@ -17,7 +17,7 @@ const AxiosBackEndAdapter = axios.create({});
 AxiosBackEndAdapter.interceptors.request.use(function (config) {
   config.method = 'POST';
   const requestedUrl = config.url;
-  config.url = APP_CONSTANT.BACKEND_API;
+  config.url = APP_CONSTANT.BACKEND_API_BASE_URL;
   config.headers = {
     'Content-Type': 'application/json',
   };

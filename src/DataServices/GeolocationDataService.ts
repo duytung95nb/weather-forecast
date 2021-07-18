@@ -2,9 +2,10 @@ import { DefaultLocation as DefaultLocation } from '../Models/DefaultLocation';
 import APP_CONSTANT from '../Constants/AppConstant';
 import AxiosAdapter from './AxiosAdapter';
 import { Location } from '../Containers/Search/Models';
+import AxiosOriginal from './AxiosOriginal';
 class GeolocationDataService {
   getByIpAddress() {
-    return AxiosAdapter.get<DefaultLocation>('http://www.geoplugin.net/json.gp');
+    return AxiosOriginal.get<DefaultLocation>('http://www.geoplugin.net/json.gp');
   }
   searchByText(text: string) {
     return AxiosAdapter.get<Location[]>(

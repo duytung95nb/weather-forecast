@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError } from 'axios';
 
 // Next we make an 'instance' of it
 const AxiosOriginal = axios.create({});
@@ -12,4 +12,4 @@ AxiosOriginal.interceptors.response.use(
   },
 );
 
-export default AxiosOriginal
+export default AxiosOriginal;
